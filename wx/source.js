@@ -60,7 +60,7 @@ router.post('/wechat', ctx => {
             FromUserName: msg.ToUserName,
             CreateTime: Date.now(),
             MsgType: msg.MsgType,
-            Content: 'Hello ' + msg.Content
+            Content: 'Hello ' + msg.Content+ '666666'
         }
     })
     ctx.body = result

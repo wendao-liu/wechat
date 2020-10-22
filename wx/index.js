@@ -14,7 +14,7 @@ const wechat = require('co-wechat')
 router.all('/wechat', wechat(conf).middleware(
     async message => {
         console.log('wechart', message)
-        return 'Hello world! '+message.Content;
+        return 'Hello world! ' + message.Content;
     }
 ))
 
@@ -36,16 +36,17 @@ router.get('/getTokens', async ctx => {
     ctx.body = res.data
 })
 const WechatAPI = require('co-wechat-api');
-const { ServerToken} = require('./mongoose')
+const { ServerToken } = require('./mongoose')
 const api = new WechatAPI(conf.appid, conf.appsecret,
     async function () {
+        console.log('---1---')
         return await ServerToken.findOne()
     },
     async function (token) {
-            const res = await ServerToken.updateOne({}, token, { upsert: true })
+        console.log('---2---')
+        const res = await ServerToken.updateOne({}, token, { upsert: true })
     }
-    
-    );
+);
 
 // router.get('/getFollowers', async ctx => {
 //     const url = `https://api.weixin.qq.com/cgi-bin/user/get?access_token=${tokenCache.access_token}`
